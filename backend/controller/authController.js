@@ -9,7 +9,7 @@ const registerUser = async(req,res) =>{
         const {name,email,password}= req.body;
         const userExists = await User.findOne({email});
         if(userExists){
-            res.status(400).json({message: "User already exists"});
+           return res.status(400).json({message: "User already exists"});
         }
  const salt = await bcrypt.genSalt(10);
  const hashedPassword = await bcrypt.hash(password,salt);
@@ -33,7 +33,7 @@ const LoginUser = async(req, res)=>{
         const {email, password} = req.body;
         const user = await User.findOne({email});
         if(!user){
-            res.status(400).json({message: "Invalid email or password"});
+            return res.status(400).json({message: "Invalid email or password"});
         }
         res.status(200).json({message: "User Login Successfully", token : generateToken(user._id),user});
     } catch(error){

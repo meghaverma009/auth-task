@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { useNavigate } from "react-router-dom";
 import { loginUser } from '../services/authService';
 
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ function Login() {
         email: '',
         password: ''
     });
-
+const navigate = useNavigate();
 
     const handleChange = (e) => {
 
@@ -36,7 +36,7 @@ function Login() {
                 'token',
                 data.token
             );
-
+ navigate("/dashboard");
             console.log(data);
 
         } catch (error) {
